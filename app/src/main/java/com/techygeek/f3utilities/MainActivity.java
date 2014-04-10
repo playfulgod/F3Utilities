@@ -39,7 +39,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-/*
         // Create an ad.
         adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
@@ -53,12 +52,12 @@ public class MainActivity extends Activity {
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device.
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("0DE03E6D3F16381D069654B06F38077D")
+                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                //.addTestDevice("0DE03E6D3F16381D069654B06F38077D")
                 .build();
 
         // Start loading the ad in the background.
-        adView.loadAd(adRequest);*/
+        adView.loadAd(adRequest);
 
         // Is this application running on a LG Optimus F3 (fx3)?
         String line = "";

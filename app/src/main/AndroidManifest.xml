@@ -19,27 +19,33 @@
             android:value="4242000"/>
         <activity
             android:name="com.techygeek.f3utilities.MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
         </activity>
  
         <activity
             android:name="com.techygeek.f3utilities.RecoveryInstallerActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_recovery_installer" >
         </activity>
         <activity
             android:name="com.techygeek.f3utilities.RecoveryUninstallerActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_recovery_uninstaller" >
         </activity>
         <activity
             android:name="com.techygeek.f3utilities.SDhacksActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_sdhacks" >
         </activity>
         <activity
             android:name="com.techygeek.f3utilities.FormatActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_format" >
         </activity>
         <activity
             android:name="com.techygeek.f3utilities.SplashScreen"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,6 +55,7 @@
         </activity>
         <activity
             android:name="com.techygeek.f3utilities.RooterActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_root" >
         </activity>
         <activity
