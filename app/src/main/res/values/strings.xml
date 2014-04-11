@@ -38,14 +38,14 @@
     <string name="sderror">I detected that your SD Card is already formatted or that Links2SD is already in place. This hack is not compatible with that. Factory Reset and delete any other partitions.</string>
     <string name="error_format">Format the Second Partition</string>
     <string name="clickme">Click ME</string>
-    <string name="app_developer">PlayfulGod</string>
+    <string name="app_developer"><b>Pressy4pie, PlayfulGod.</b>\n\n CWM ported by: <b>Pressy4pie.</b>\n\n SDCardHack implemented by: <b> PressY4pie.</b>\n\n Root method by: <b>k1mu.</b>\n\n Special Thanks to: the <b>#oudhitsquad.</b></string>
     <string name="about_dialog_copyright">All Rights Reserved &#169; 2014 TechyGeek</string>
     <string name="about_dialog_title"><b>About F3 Utilities</b></string>
     <string name="app_version">Version: 1.0</string>
-    <string name="about_dialog_developed_by_as_link">Developed by: PlayfulGod</string>
+    <string name="about_dialog_developed_by_as_link">Developed by: <b>Pressy4pie, PlayfulGod.</b>\n\n CWM ported by: <b>PlayfulGod.</b>\n\n SDCardHack implemented by: <b> PressY4pie.</b>\n\n Root method by: <b>k1mu.</b>\n\n Special Thanks to: the <b>#oudhitsquad.</b></string>
     <string name="web_url"><a href="http://mgd-llc.com">www.unleashedprepaids.com</a></string>
     <string name="ok">Ok</string>
-    <string name="about_dialog_build_version">Build version: 1.0.0</string>
+    <string name="about_dialog_build_version">Build version: 1.0.1</string>
     <string name="copyright">Copyright &#169; 2014 TechyGeek\nAll Rights Reserved</string>
     <string name="startroot">Attempt to get Root</string>
     <string name="title_activity_rooter">Getting Root</string>

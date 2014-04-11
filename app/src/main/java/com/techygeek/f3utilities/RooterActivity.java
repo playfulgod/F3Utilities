@@ -9,7 +9,9 @@ package com.techygeek.f3utilities;
         import java.io.OutputStream;
 
         import android.os.Bundle;
+        import android.os.Handler;
         import android.app.Activity;
+        import android.app.ProgressDialog;
         import android.content.Intent;
         import android.content.res.AssetManager;
         import android.util.Log;
@@ -17,16 +19,26 @@ package com.techygeek.f3utilities;
         import android.view.View;
 
 public class RooterActivity extends Activity {
+    ProgressDialog barProgressDialog;
+    Handler updateBarHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rooter);
+        updateBarHandler = new Handler();
 
+        //create dirs to be copied to
         File dir = new File ("/data/data/com.techygeek.f3utilities/saferoot");
         dir.mkdirs();
-
+        //copy the root files
         CopyAssets();
+
+        root_tools.executeAsSH("chmod 0755 /data/data/com.techygeek.f3utilities/saferoot/getroot_finish.sh");
+        root_tools.executeAsSH("chmod 0755 /data/data/com.techygeek.f3utilities/saferoot/getroot_begin.sh");
+        root_tools.executeAsSH("chmod 0755 /data/data/com.techygeek.f3utilities/saferoot/getroot");
+
     }
 
     @Override
@@ -36,11 +48,12 @@ public class RooterActivity extends Activity {
         return true;
     }
 
+    //method to copy assets from "saferoot"
     private void CopyAssets() {
         AssetManager assetManager = getAssets();
         String[] files = null;
         try {
-            files = assetManager.list("Files");
+            files = assetManager.list("saferoot");
         } catch (IOException e) {
             Log.e("Asset Copy", e.getMessage());
         }
@@ -50,8 +63,8 @@ public class RooterActivity extends Activity {
             InputStream in = null;
             OutputStream out = null;
             try {
-                in = assetManager.open("Files/"+filename);   // if files resides inside the "Files" directory itself
-                out = new FileOutputStream("/data/data/com.techygeek.f3utilities/recovery/" + filename);
+                in = assetManager.open("saferoot/"+filename);   // if files resides inside the "Files" directory itself
+                out = new FileOutputStream("/data/data/com.techygeek.f3utilities/saferoot/" + filename);
                 copyFile(in, out);
                 in.close();
                 in = null;
@@ -72,20 +85,41 @@ public class RooterActivity extends Activity {
     }
 
 
+    //all the work for rooting
+    public void getRoot(){
+        //set up directories && chmod
+        root_tools.executeAsSH("/data/data/com.techygeek.f3utilities/saferoot/getroot_begin.sh");
+        Log.i("getroot", "getroot_begin.sh executed...");
+        Log.i("getroot", "Starting actual root now...");
 
+        //the actual get root
+        root_tools.executeAsSH("/data/data/com.techygeek.f3utilities/saferoot/getroot");
+        Log.i("getroot", "getroot executed...");
 
+        //clean up
+        root_tools.executeAsSH("/data/data/com.techygeek.f3utilities/saferoot/getroot_finish.sh");
+        Log.i("getroot", "getroot_finish.sh executed...");
 
-    public void start(View view){
-        Runtime rt = Runtime.getRuntime();
-        try {
-            Process q = rt.exec(new String("chmod 0755 /data/data/com.techygeek.f3utilities/saferoot/getroot.sh"));
-            Process p = rt.exec(new String("/data/data/com.techygeek.f3utilities/saferoot/getroot.sh"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    }
+
+    //the method to start the root.
+    public void start(View view) {
+        final ProgressDialog RingProgressDialog = ProgressDialog.show(RooterActivity.this, "Please Wait", "Rooting", true);
+        RingProgressDialog.setCancelable(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //this is the runnable stuff for the progress bar
+                    getRoot();
+                } catch (Exception e) {
+                    Log.e("root", "something went wrong");
+                }
+                RingProgressDialog.dismiss();
+
+            }
+        }).start();
     }
 
 }
-
 

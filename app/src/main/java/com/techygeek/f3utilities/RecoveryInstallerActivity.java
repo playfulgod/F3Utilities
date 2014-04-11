@@ -28,10 +28,9 @@ public class RecoveryInstallerActivity extends Activity {
 		String cmd_aboot = "busybox dd if=/data/data/com.techygeek.f3utilities/recovery/aboot.img of=/dev/block/platform/msm_sdcc.1/by-name/aboot";
 		
 		//where the install will happen...
-		String cmd_chmod = "busybox chmod a+x /data/data/com.techygeek.f3utilities/recovery/loki_flash";
-		String cmd_install = "/data/data/com.techygeek.f3utilities/recovery/loki_flash recovery /data/data/com.techygeek.f3utilities/recovery/fx3mt-cwm.lok";
+		String cmd_install = "busybox dd if=/data/data/com.techygeek.f3utilities/recovery/fx3mt-cwm.lok of=/dev/block/platform/msm_sdcc.1/by-name/recovery";
 		
-		root_tools.execute(cmd_chmod);
+		root_tools.execute(cmd_aboot);
 		root_tools.execute(cmd_install);
 		
 		Context context = getApplicationContext();

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="@+id/linearLayout1"
         android:layout_marginTop="-20dp"
-        android:src="@drawable/upp"/>
+        android:src="@drawable/upp" />
 
     <TextView
         android:id="@+id/textView1"
@@ -34,14 +34,15 @@
         android:layout_alignParentLeft="true"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="15dp" >
+        android:paddingTop="15dp">
 
         <Button
-        android:id="@+id/btn_main_rooter"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="startroot"
-        android:text="@string/startroot" />
+            android:id="@+id/btn_main_rooter"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="startroot"
+            android:text="@string/startroot"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/btn_main_cwm"
@@ -49,21 +50,21 @@
             android:layout_height="wrap_content"
             android:onClick="recoveryInstaller"
             android:text="@string/recovery_installer" />
-        
+
         <Button
             android:id="@+id/btn_main_stock"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="recoveryUninstaller"
             android:text="@string/recovery_uninstaller" />
-            
+
         <Button
             android:id="@+id/btn_main_sdhacks"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="sdhacks"
             android:text="@string/SD_Stuff"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_main_rebooter"
@@ -84,11 +85,10 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:id="@+id/linearLayout2">
-        </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
 </RelativeLayout>
