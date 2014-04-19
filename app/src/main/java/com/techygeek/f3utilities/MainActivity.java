@@ -1,33 +1,25 @@
 package com.techygeek.f3utilities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Context;
-//import android.content.Context;
 import android.content.Intent;
-//import android.content.pm.PackageManager;
-//import android.content.pm.PackageManager.NameNotFoundException;
-//import android.content.res.AssetManager;
-//import android.util.Log;
+import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.*;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-
-
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class MainActivity extends Activity {
+    String tagname = "Recovery Install";
+    String dir = Environment.getExternalStorageDirectory() + "/F3Utilities/recovery";
     /** The view to show the ad. */
     private AdView adView;
 
@@ -79,6 +71,7 @@ public class MainActivity extends Activity {
                 IncorrectDevice.setIcon(R.drawable.warn);
                 IncorrectDevice.setTitle("Wrong Device!");
                 IncorrectDevice.setMessage("You are probably not running this application on the LG Optimus F3. Please note that this application is intended to run on the LG Optimus F3. If you are using a LG Optimus F3, please contact your ROM developer and tell him, that the \nro.product.name should be fx3_mpcs_tmo_us.");
+                IncorrectDevice.setCancelable(false);
                 IncorrectDevice.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -88,13 +81,6 @@ public class MainActivity extends Activity {
             }
         }
     }
-
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}*/
 
     public void startroot(View view){
     	Intent intent = new Intent(this, RooterActivity.class);
@@ -119,20 +105,14 @@ public class MainActivity extends Activity {
         //Intent intent = new Intent(this, rebooter.class);
 
         root_tools.execute("reboot recovery");
+
     }
 	
-	public void sdhacks(View view){
-
-		Intent intent = new Intent(this, SDhacksActivity.class);
-
-			startActivity(intent);
-			}
-
-
 	public void info(View view) {
         AlertDialog.Builder about = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         about.setTitle(R.string.title_activity_info);
+        about.setCancelable(false);
         about.setIcon(R.drawable.apple);
         about.setView(inflater.inflate(R.layout.activity_info, null));
         about.setNegativeButton("Close", new DialogInterface.OnClickListener() {

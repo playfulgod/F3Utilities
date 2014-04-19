@@ -1,60 +1,54 @@
 package com.techygeek.f3utilities;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+
 
 public class RecoveryUninstallerActivity extends Activity {
-	protected boolean mbActive;
-    protected ProgressBar mProgressBar;
 
+    String tagname = "Recovery Restore";
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_recovery_uninstaller);
-		mProgressBar = (ProgressBar)findViewById(R.id.uninstalling_progress_bar);
-		mProgressBar.setVisibility(View.GONE);
-		
-	}
-		
-	
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.recovery_uninstaller, menu);
-		return true;
-	}*/
-	
-	
-	public void uninstaller(View view){
-		//where the uninstall will happen...
-		//this gets treated as an error but actually is not.
-		mProgressBar.setProgress(100);
-		mProgressBar.setVisibility(View.VISIBLE);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recovery_uninstaller);
 
+    }
 
-		
-		commit();
-		
-	}
-	
-	public void commit(){
-		String cmd_uninstall = "busybox dd if=/data/data/com.techygeek.f3utilities/recovery/stock-recovery.img of=/dev/block/platform/msm_sdcc.1/by-name/recovery";
-		root_tools.execute(cmd_uninstall);
-		
-		Context context = getApplicationContext();
-		CharSequence text = "Recovery has been restored to Stock!";
-		int duration = Toast.LENGTH_SHORT;
-		Toast success = Toast.makeText(context, text, duration);
-		success.show();
-		
-		
-		mProgressBar.setVisibility(View.GONE);
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.recovery_uninstaller, menu);
+        return true;
+    }
 
+    void install(){
+        String dir = Environment.getExternalStorageDirectory() + "/F3Utilities/recovery";
+        String cmd_install = "busybox dd if="+ dir + "/stock-recovery.img" + " of=/dev/block/platform/msm_sdcc.1/by-name/recovery";
+        root_tools.execute(cmd_install);
+        Log.i(tagname, "Stock Recovery restored.");
+    }
+
+    //the method to start the restore.
+    public void start(View view) {
+        final ProgressDialog RingProgressDialog = ProgressDialog.show(RecoveryUninstallerActivity.this, "Please Wait", "Restoring Recovery", true);
+        RingProgressDialog.setCancelable(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //this is the runnable stuff for the progress bar
+                    install();
+                } catch (Exception e) {
+                    Log.e(tagname, "something went wrong");
+                }
+                RingProgressDialog.dismiss();
+            }
+        }).start();
+    }
 }
